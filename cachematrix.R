@@ -1,15 +1,36 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Summary: This functions creat an object with set/get methods for 
+##          a matrix data and set/get methods to cache solve operation
+## Example:
+##    mtx_test <- makeCacheMatrix( matrix(c(1:4), nrow = 2, ncol = 2) )
+##    cacheSolve(mtx_test)
 
-## Write a short comment describing this function
+## Create a list with 4 methods to set/get matrix and cache operations
 
 makeCacheMatrix <- function(x = matrix()) {
-
+  cache <- NULL
+  set <- function(y) {
+    x <<- y
+    cache <<- NULL
+  }
+  get <- function() x
+  setcache <- function(to_cache) cache <<- to_cache
+  getcache <- function() cache
+  list(set = set, get = get,
+       setcache = setcache,
+       getcache = getcache)
 }
 
 
-## Write a short comment describing this function
+## Return a matrix's solve operation and cache the result 
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  msolve <- x$getcache()
+  if(!is.null(msolve)) {
+    message("getting cached data")
+    return(msolve)
+  }
+  data <- x$get()
+  msolve <- solve(data, ...)
+  x$setcache(msolve)
+  msolve
 }
