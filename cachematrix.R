@@ -1,4 +1,4 @@
-## Summary: This functions creat an object with set/get methods for 
+## Summary: This functions create an object with set/get methods for 
 ##          a matrix data and set/get methods to cache solve operation
 ## Example:
 ##    mtx_test <- makeCacheMatrix( matrix(c(1:4), nrow = 2, ncol = 2) )
